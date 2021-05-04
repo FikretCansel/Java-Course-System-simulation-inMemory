@@ -31,6 +31,8 @@ public class EntityRepositoryBase<Entity> implements EntityRepository<Entity> {
 
     @Override
     public void update(Entity entity) {
-        System.out.println("Güncüllendi");
+        int index=entities.indexOf(entity);
+        entities.set(index,entity);
+        System.out.println("Güncellendi");
     }
 }
