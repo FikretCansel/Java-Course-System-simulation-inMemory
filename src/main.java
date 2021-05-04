@@ -15,14 +15,20 @@ public class main {
 
         studentManager.writeFirstName();
 
+        System.out.println("-----------");
+
         Student fikret=new Student("Fikret","Cansel",100,"fikret@gmail.com","123");
         studentManager.add(fikret);
 
         studentManager.writeFirstName();
 
+        System.out.println("-----------");
+
         studentManager.delete(eyup);
 
         studentManager.writeFirstName();
+
+        System.out.println("-----------");
 
         InstructorManger instructorManger=new InstructorManger();
 
@@ -30,9 +36,13 @@ public class main {
 
         instructorManger.add(engin);
 
-        instructorManger.writeFirstName();
+        //instructorManger.writeFirstName();
 
-        CourseManager courseManager = new CourseManager();
+        fikret.setFirstName("eyup");
+
+        studentManager.update(fikret);
+
+        studentManager.writeFirstName();
 
 
     }
