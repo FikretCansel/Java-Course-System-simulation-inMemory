@@ -1,9 +1,12 @@
 package Abstract;
+import Results.DataResult;
+import Results.IResult;
+
 import java.util.List;
 
 public interface EntityRepository<Entity> {
-    void add(Entity entity);
-    List<Entity> getAll();
-    void delete(Entity entity);
-    void update(Entity entity);
+    IResult add(Entity entity);
+    DataResult<List<Entity>> getAll();
+    IResult delete(Entity entity);
+    IResult update(Entity entity);
 }

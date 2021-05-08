@@ -1,36 +1,57 @@
 package Concrete;
 import Abstract.EntityRepository;
-
+import Abstract.Validation.IValidationBase;
+import Results.DataResult;
+import Results.Result;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntityRepositoryBase<Entity> implements EntityRepository<Entity> {
 
     private List<Entity> entities;
+    private IValidationBase validation;
+
+
+    public EntityRepositoryBase(IValidationBase validation) {
+        this.validation=validation;
+        this.entities = new ArrayList<>();
+    }
 
     public EntityRepositoryBase() {
         this.entities = new ArrayList<>();
     }
 
-    @Override
-    public void add(Entity entity) {
+
+    public Result add(Entity entity) {
+        if(validation!=null){
+            if(!validation.checkAdd(entity)){
+                return new Result("Ekleme Başarısız",false);
+            }
+        }
         entities.add(entity);
-        System.out.println("Ekleme Başarılı");
+        return new Result("Başarı ile Eklendi",true);
     }
 
-    @Override
-    public List<Entity> getAll() {
-        return entities;
+    public DataResult<List<Entity>> getAll() {
+        return new DataResult<List<Entity>>(entities,true,"Listelendi");
     }
 
-    @Override
-    public void delete(Entity entity) {
+    public Result delete(Entity entity) {
         entities.remove(entity);
-        System.out.println("Kaldırıldı");
+        return new Result("Başarı ile Silindi",true);
     }
 
-    @Override
-    public void update(Entity entity) {
-        System.out.println("Güncüllendi");
+    public Result update(Entity entity) {
+
+        if(validation!=null){
+            if(!validation.checkUpdate(entity)){
+                return new Result("",false);
+            }
+        }
+
+        int index=entities.indexOf(entity);
+        entities.set(index,entity);
+
+        return new Result("Başarı ile Silindi",true);
     }
 }
