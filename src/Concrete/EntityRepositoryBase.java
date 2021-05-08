@@ -53,5 +53,10 @@ public class EntityRepositoryBase<Entity> implements EntityRepository<Entity> {
         entities.set(index,entity);
 
         return new Result("Başarı ile Silindi",true);
+    @Override
+    public void update(Entity entity) {
+        int index=entities.indexOf(entity);
+        entities.set(index,entity);
+        System.out.println("Güncellendi");
     }
 }
